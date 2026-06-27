@@ -1,0 +1,220 @@
+:root {
+  --bg: #faf7f2;
+  --ink: #2b2620;
+  --muted: #8a7f6e;
+  --accent: #a8553e;
+  --line: #e3dccd;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Georgia', 'Iowan Old Style', serif;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+header.site {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+}
+
+header.site h1 {
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+header.site h1 a { color: var(--ink); }
+
+nav.admin-nav a, nav.admin-nav button {
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.poem-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+
+.poem-card h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+.poem-card .meta {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.poem-body {
+  white-space: pre-wrap;
+  font-size: 17px;
+}
+
+.poem-body.excerpt {
+  max-height: 160px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.like-btn {
+  font-family: inherit;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 14px;
+}
+.like-btn:hover { background: #fbeeea; }
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 60px 0;
+  font-style: italic;
+}
+
+.comments-section {
+  margin-top: 40px;
+}
+
+.comment {
+  border-top: 1px solid var(--line);
+  padding: 14px 0;
+}
+
+.comment .who {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.comment .when {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.comment .delete-form {
+  display: inline;
+  margin-left: 8px;
+}
+
+.comment .delete-form button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+form.comment-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffdf9;
+  color: var(--ink);
+}
+
+textarea { min-height: 90px; resize: vertical; }
+
+button.primary, input[type="submit"] {
+  font-family: inherit;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  align-self: flex-start;
+}
+button.primary:hover { opacity: 0.9; }
+
+.back-link { display: inline-block; margin-bottom: 20px; font-size: 14px; }
+
+.admin-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.admin-poem-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+}
+
+.admin-poem-row .title { font-weight: bold; }
+
+.danger {
+  background: none;
+  border: 1px solid #c44;
+  color: #c44;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.login-box {
+  max-width: 360px;
+  margin: 80px auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.error-msg {
+  color: #c44;
+  font-size: 14px;
+}

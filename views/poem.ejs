@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= poem.title %> — Verses</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <h1><a href="/">Verses</a></h1>
+      <nav class="admin-nav">
+        <% if (isAdmin) { %>
+          <a href="/admin">Admin</a>
+          <form action="/admin/logout" method="POST" style="display:inline;">
+            <button type="submit">Log out</button>
+          </form>
+        <% } else { %>
+          <a href="/admin/login">Admin</a>
+        <% } %>
+      </nav>
+    </header>
+
+    <a class="back-link" href="/">&larr; All poems</a>
+
+    <div class="poem-card">
+      <h2><%= poem.title %></h2>
+      <div class="meta"><%= new Date(poem.created_at + ' UTC').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) %></div>
+      <div class="poem-body"><%= poem.body %></div>
+      <div class="row">
+        <form action="/poem/<%= poem.id %>/like" method="POST">
+          <button class="like-btn" type="submit">&#9825; Like (<%= poem.likes %>)</button>
+        </form>
+        <% if (isAdmin) { %>
+          <form action="/admin/poems/<%= poem.id %>/delete" method="POST" onsubmit="return confirm('Delete this poem and all its comments?');">
+            <button class="danger" type="submit">Delete poem</button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <h3>Comments (<%= comments.length %>)</h3>
+      <% comments.forEach(c => { %>
+        <div class="comment">
+          <span class="who"><%= c.name %></span>
+          <span class="when"><%= new Date(c.created_at + ' UTC').toLocaleString() %></span>
+          <% if (isAdmin) { %>
+            <form class="delete-form" action="/admin/comments/<%= c.id %>/delete" method="POST" onsubmit="return confirm('Delete this comment?');">
+              <button type="submit">delete</button>
+            </form>
+          <% } %>
+          <div><%= c.body %></div>
+        </div>
+      <% }) %>
+
+      <form class="comment-form" action="/poem/<%= poem.id %>/comment" method="POST">
+        <input type="text" name="name" placeholder="Your name" maxlength="60" required>
+        <textarea name="body" placeholder="Leave a comment..." maxlength="1000" required></textarea>
+        <button class="primary" type="submit">Post comment</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

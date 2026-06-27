@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verses</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <h1><a href="/">Verses</a></h1>
+      <nav class="admin-nav">
+        <% if (isAdmin) { %>
+          <a href="/admin">Admin</a>
+          <form action="/admin/logout" method="POST" style="display:inline;">
+            <button type="submit">Log out</button>
+          </form>
+        <% } else { %>
+          <a href="/admin/login">Admin</a>
+        <% } %>
+      </nav>
+    </header>
+
+    <% if (poems.length === 0) { %>
+      <p class="empty">No poems posted yet. Check back soon.</p>
+    <% } else { %>
+      <% poems.forEach(poem => { %>
+        <div class="poem-card">
+          <h2><a href="/poem/<%= poem.id %>"><%= poem.title %></a></h2>
+          <div class="meta"><%= new Date(poem.created_at + ' UTC').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) %> &middot; <%= poem.likes %> like<%= poem.likes === 1 ? '' : 's' %></div>
+          <div class="poem-body excerpt"><%= poem.body %></div>
+          <div class="row">
+            <a href="/poem/<%= poem.id %>">Read more &amp; comment &rarr;</a>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</body>
+</html>

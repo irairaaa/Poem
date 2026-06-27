@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Verses</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <h1><a href="/">Verses</a></h1>
+      <nav class="admin-nav">
+        <a href="/">View site</a>
+        <form action="/admin/logout" method="POST" style="display:inline;">
+          <button type="submit">Log out</button>
+        </form>
+      </nav>
+    </header>
+
+    <div class="admin-box">
+      <h2>New poem</h2>
+      <form method="POST" action="/admin/poems" style="display:flex; flex-direction:column; gap:12px;">
+        <input type="text" name="title" placeholder="Title" required maxlength="200">
+        <textarea name="body" placeholder="Write your poem here..." required style="min-height:220px;"></textarea>
+        <button class="primary" type="submit">Publish</button>
+      </form>
+    </div>
+
+    <div class="admin-box">
+      <h2>Manage poems (<%= poems.length %>)</h2>
+      <% if (poems.length === 0) { %>
+        <p class="empty">Nothing posted yet.</p>
+      <% } %>
+      <% poems.forEach(p => { %>
+        <div class="admin-poem-row">
+          <span class="title"><a href="/poem/<%= p.id %>"><%= p.title %></a></span>
+          <form action="/admin/poems/<%= p.id %>/delete" method="POST" onsubmit="return confirm('Delete this poem and all its comments?');">
+            <button class="danger" type="submit">Delete</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>
